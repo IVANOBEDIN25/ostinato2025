@@ -14,6 +14,11 @@
   --dot-accent: #22c55e;
   --safe-top: env(safe-area-inset-top, 0px);
 }
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;         /* страница не скроллится */
+}
 
 body {
   margin: 0;
@@ -24,6 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overscroll-behavior: none; /* меньше “резинки” */
 }
   
 
@@ -50,6 +56,7 @@ body {
   justify-content: center;
   padding: 16px;
   padding-top: calc(var(--safe-top) + 10px);
+  overflow: hidden;
 }
 
 .metronome-card {
@@ -182,6 +189,10 @@ body {
   height: 100%;
   overflow-y: auto;
   scrollbar-width: none;
+  overflow-x: hidden;                 /* ключевое: нет скролла вбок */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;  /* плавность на iOS */
+  touch-action: pan-y;                /* жесты только вверх/вниз */
 
   /* вот ключ: пустое поле сверху/снизу */
   padding: calc((var(--wheel-h) / 2) - (var(--item-h) / 2)) 0;
@@ -190,6 +201,9 @@ body {
 .wheel-list::-webkit-scrollbar { display: none; }
 
 .wheel-item {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   height: var(--item-h);
   line-height: var(--item-h);
   text-align: center;
@@ -240,9 +254,8 @@ body {
 }
 
 .wheel-list--locked {
-  overflow-y: hidden;
+  pointer-events: none;  /* нельзя крутить/тапать */
 }
-
 
 /* ТОЧКИ ДОЛЕЙ – тоже на фоне, без подписи и свечения */
 
