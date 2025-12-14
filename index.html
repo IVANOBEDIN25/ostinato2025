@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>OSTINATO</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#111827" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="OSTINATO" />
+</head>
+
+<body>
+  <header class="app-header">
+    <h1>OSTINATO</h1>
+  </header>
+
+  <main class="app-main">
+    <section class="metronome-card">
+      <!-- КРУПНЫЙ ТЕМП -->
+      <div class="tempo-section">
+        <div class="tempo-main">
+          <input
+            id="bpm-input"
+            type="number"
+            min="15"
+            max="300"
+            value="120"
+            class="tempo-input"
+          />
+          <span class="tempo-unit">bpm</span>
+        </div>
+
+        <!-- ВОТ СЮДА ВСТАВЛЯЕМ КНОПКИ -->
+        <div class="tempo-stepper" aria-label="Управление темпом">
+          <button class="step-btn" type="button" id="bpm-minus5">-5</button>
+          <button class="step-btn" type="button" id="bpm-minus1">-1</button>
+          <button class="step-btn" type="button" id="bpm-plus1">+1</button>
+          <button class="step-btn" type="button" id="bpm-plus5">+5</button>
+        </div>
+
+        <input
+          id="bpm-slider"
+          type="range"
+          min="15"
+          max="300"
+          value="120"
+          step="1"
+          class="tempo-slider"
+        />
+      </div>
+
+
+      <!-- ДВА ТУМБЛЕРА: РАЗМЕР И СУБДОЛИ -->
+      <div class="pickers-row">
+        <!-- Размер -->
+        <div class="picker-wrapper">
+          <div class="picker-label">Division</div>
+          <div class="wheel">
+            <div class="wheel-gradient wheel-gradient-top"></div>
+            <ul class="wheel-list" id="mode-list">
+                
+              <li class="wheel-item">1/4</li>
+              <li class="wheel-item">2/4</li>
+              <li class="wheel-item">3/4</li>
+              <li class="wheel-item">4/4</li>
+              <li class="wheel-item">5/4</li>
+              <li class="wheel-item">7/4</li>
+              <li class="wheel-item">9/4</li>              
+              <li class="wheel-item">6/8</li>
+              <li class="wheel-item">7/8</li>
+              <li class="wheel-item">9/8</li>
+                            
+            </ul>
+            <div class="wheel-gradient wheel-gradient-bottom"></div>
+            <div class="wheel-center-highlight"></div>
+          </div>
+        </div>
+
+        <!-- Субдоли -->
+        <div class="picker-wrapper">
+          <div class="picker-label">Subdivision</div>
+          <div class="wheel">
+            <div class="wheel-gradient wheel-gradient-top"></div>
+            <ul class="wheel-list" id="subdivision-list">
+               
+              <li class="wheel-item">–</li>
+              <li class="wheel-item">1/8</li>
+              <li class="wheel-item">1/8 triplets</li>
+              <li class="wheel-item">1/8 swing</li>
+              <li class="wheel-item">1/16</li>
+              <li class="wheel-item">1/16 triplets</li>
+              <li class="wheel-item">1/16 swing</li>
+                            
+            </ul>
+            <div class="wheel-gradient wheel-gradient-bottom"></div>
+            <div class="wheel-center-highlight"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- МИГАЮЩИЕ ДОЛИ (ТОЧКИ НА ФОНЕ) -->
+      <div class="beats-dots" id="beats-dots">
+        <!-- по умолчанию 4/4 -->
+        <div class="beat-dot beat-dot--accent"></div>
+        <div class="beat-dot"></div>
+        <div class="beat-dot"></div>
+        <div class="beat-dot"></div>
+      </div>
+
+      <!-- КНОПКА СТАРТ / СТОП И СЕКУНДОМЕР -->
+      <div class="control-section">
+        <button id="start-stop-btn" class="control-btn control-btn--primary">
+          Start
+        </button>
+
+        <div class="timer-block">
+          <span class="timer-label">Time</span>
+          <span class="timer-value" id="timer-display">00:00</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

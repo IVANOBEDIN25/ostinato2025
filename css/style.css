@@ -1,0 +1,364 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #020617;
+  --card: #020617;
+  --border-subtle: #1f2937;
+  --accent: #22c55e;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --danger: #ef4444;
+  --dot-neutral: #111827;
+  --dot-accent: #22c55e;
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+  
+
+/* HEADER */
+
+.app-header {
+  text-align: center;
+  padding: 12px 16px;
+  background: #020617;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* MAIN WRAPPER */
+
+.app-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  padding-top: calc(var(--safe-top) + 10px);
+}
+
+.metronome-card {
+  width: 100%;
+  max-width: 420px;
+  background: #020617;
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 18px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* TEMPO – главный элемент */
+
+.tempo-section {
+  padding: 16px 14px 14px;
+  border-radius: 18px;
+  background: #020617;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.tempo-main {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tempo-input {
+  width: 150px;
+  border: none;
+  background: transparent;
+  color: var(--text-main);
+  font-size: 4rem;
+  font-weight: 700;
+  text-align: right;
+  outline: none;
+  /* -moz-appearance: textfield; */
+}
+
+.tempo-input::-webkit-outer-spin-button,
+.tempo-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.tempo-unit {
+  font-size: 0.9rem;
+  text-transform: lowercase;
+  color: var(--text-muted);
+  align-self: flex-end;
+  margin-bottom: 6px;
+}
+
+.tempo-slider {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+/* BPM step buttons */
+
+.tempo-stepper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px 0 10px;
+}
+
+.step-btn {
+  border: 1px solid rgba(148, 163, 184, 0.35);;
+  background: transparent;
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.step-btn:active {
+  transform: translateY(1px);
+}
+
+.step-btn:focus {
+  outline: none;
+  border-color: rgba(34, 197, 94, 0.6);
+}
+
+
+/* ПАРА ТУМБЛЕРОВ НА ФОНЕ */
+
+.pickers-row {
+  display: flex;
+  gap: 12px;
+}
+
+.picker-wrapper {
+  flex: 1;
+}
+
+.picker-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 4px;
+}
+
+/* ===== WHEEL (iOS-like) ===== */
+
+:root{
+  --wheel-h: 120px;     /* высота окна колеса */
+  --item-h: 32px;       /* высота одной строки */
+}
+
+.wheel {
+  position: relative;
+  height: var(--wheel-h);
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.wheel-list {
+  list-style: none;
+  margin: 0;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  /* вот ключ: пустое поле сверху/снизу */
+  padding: calc((var(--wheel-h) / 2) - (var(--item-h) / 2)) 0;
+}
+
+.wheel-list::-webkit-scrollbar { display: none; }
+
+.wheel-item {
+  height: var(--item-h);
+  line-height: var(--item-h);
+  text-align: center;
+  padding: 0;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: transform 0.12s ease, color 0.12s ease;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wheel-item--active {
+  color: var(--text-main);
+  font-weight: 600;
+  transform: scale(1.06);
+}
+
+.wheel-gradient {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 34px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.wheel-gradient-top {
+  top: 0;
+  background: linear-gradient(to bottom, #020617, transparent);
+}
+
+.wheel-gradient-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, #020617, transparent);
+}
+
+.wheel-center-highlight {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  transform: translateY(-50%);
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  pointer-events: none;
+}
+
+.wheel-list--locked {
+  overflow-y: hidden;
+}
+
+
+/* ТОЧКИ ДОЛЕЙ – тоже на фоне, без подписи и свечения */
+
+.beats-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-bottom: 12px;
+}
+
+.beat-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--dot-neutral);
+  transition: background 0.01s ease, transform 0.12s ease;
+}
+
+/* Первая доля — просто больше (НЕ зелёная постоянно) */
+.beat-dot--accent {
+  width: 16px;
+  height: 16px;
+}
+
+/* Активная доля — зелёная (можно без увеличения, но оставим лёгкий акцент) */
+.beat-dot--active {
+  background: var(--dot-accent);
+  transform: scale(1.6);
+}
+
+/* УПРАВЛЕНИЕ: кнопка и таймер */
+
+.control-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-btn {
+  flex: 1.1;
+  padding: 11px 0;
+  border-radius: 999px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--accent);
+  color: #052e16;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.8);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease,
+    color 0.12s ease;
+}
+
+.control-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.9);
+}
+
+/* вариант для режима "Стоп" */
+.control-btn--danger {
+  background: var(--danger);
+  color: #fef2f2;
+}
+
+/* таймер – без отдельной "карточки" */
+
+.timer-block {
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.timer-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.timer-value {
+  font-variant-numeric: tabular-nums;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* АДАПТИВ */
+
+/* Удобные зоны нажатия на телефоне */
+button,
+.step-btn,
+.control-btn {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.step-btn {
+  padding: 10px 14px; /* больше тач-зона */
+}
+
+
+@media (max-width: 480px) {
+  .metronome-card {
+    border-radius: 20px;
+    padding: 14px 12px 16px;
+  }
+
+  .control-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .timer-block {
+    width: 100%;
+    flex: none;
+  }
+}
