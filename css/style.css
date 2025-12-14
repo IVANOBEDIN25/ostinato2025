@@ -82,7 +82,7 @@ body {
 }
 
 .tempo-input {
-  width: 150px;
+  width: 180px;
   border: none;
   background: transparent;
   color: var(--text-main);
