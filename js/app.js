@@ -567,6 +567,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
   updateButton();
   setWheelsLocked(false);
+
+  // iPad/iOS: запрет "резинки" страницы, но разрешить скролл в колесах
+document.addEventListener(
+  "touchmove",
+  (e) => {
+    const inWheel = e.target.closest(".wheel-list");
+    if (!inWheel) e.preventDefault();
+  },
+  { passive: false }
+);
+
 });
 
 // ====== SERVICE WORKER REGISTRATION ======

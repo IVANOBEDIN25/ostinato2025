@@ -15,6 +15,7 @@
   --safe-top: env(safe-area-inset-top, 0px);
 }
 html, body {
+    
   height: 100%;
   width: 100%;
   overflow: hidden;         /* страница не скроллится */
@@ -29,7 +30,11 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overscroll-behavior: none; /* меньше “резинки” */
+  position: fixed;     /* ключевое для iOS/iPadOS */
+  inset: 0;            /* top/right/bottom/left = 0 */
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
 }
   
 
@@ -191,8 +196,8 @@ body {
   scrollbar-width: none;
   overflow-x: hidden;                 /* ключевое: нет скролла вбок */
   overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;  /* плавность на iOS */
   touch-action: pan-y;                /* жесты только вверх/вниз */
+  -webkit-overflow-scrolling: touch;
 
   /* вот ключ: пустое поле сверху/снизу */
   padding: calc((var(--wheel-h) / 2) - (var(--item-h) / 2)) 0;
