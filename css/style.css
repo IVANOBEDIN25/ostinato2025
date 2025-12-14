@@ -13,11 +13,13 @@
   --dot-neutral: #111827;
   --dot-accent: #22c55e;
   --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 html, body { 
-  height: 110%;
+  height: 100%;
   width: 100%;
   overflow: hidden;         /* страница не скроллится */
+  background: #020617;
 }
 
 body {
@@ -43,6 +45,8 @@ body {
   text-align: center;
   padding: 12px 16px;
   background: #020617;
+  padding-top: calc(var(--safe-top) + 12px);
+  padding-bottom: 12px;
 }
 
 .app-header h1 {
@@ -59,7 +63,8 @@ body {
   display: flex;
   justify-content: center;
   padding: 16px;
-  padding-top: calc(var(--safe-top) + 10px);
+  padding-top: 16px;
+  padding-bottom: calc(16px + var(--safe-bottom));
   overflow: hidden;
 }
 
