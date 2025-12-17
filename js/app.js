@@ -573,10 +573,13 @@ document.addEventListener(
   "touchmove",
   (e) => {
     const inWheel = e.target.closest(".wheel-list");
-    if (!inWheel) e.preventDefault();
+    const inRange = e.target.closest('input[type="range"], .tempo-slider');
+
+    if (!inWheel && !inRange) e.preventDefault();
   },
   { passive: false }
 );
+
 
 });
 

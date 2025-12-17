@@ -127,7 +127,9 @@ body {
   width: 100%;
   margin: 0;
   accent-color: var(--accent);
+  touch-action: pan-x;
 }
+
 
 /* BPM step buttons */
 
