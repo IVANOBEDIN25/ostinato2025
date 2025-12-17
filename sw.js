@@ -1,4 +1,5 @@
-const CACHE_NAME = "ostinato-cache-v1"; // увеличивайте версию при изменениях
+const CACHE_VERSION = "vRESET1"; // ← НОВОЕ ИМЯ
+const CACHE_NAME = `ostinato-cache-${CACHE_VERSION}`;
 
 // Обязательная оболочка приложения (app shell)
 const CORE_ASSETS = [
