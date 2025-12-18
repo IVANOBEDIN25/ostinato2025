@@ -1,6 +1,6 @@
 /* Service Worker */
 
-const CACHE_VERSION = "2025-12-18-1";
+const CACHE_VERSION = "2025-12-18-2";
 const CACHE_NAME = `ostinato-cache-${CACHE_VERSION}`;
 
 const CORE_ASSETS = [
