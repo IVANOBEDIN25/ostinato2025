@@ -1,48 +1,53 @@
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 :root {
   --bg: #020617;
   --card: #020617;
-  --border-subtle: #1f2937;
   --accent: #22c55e;
+  --danger: #ef4444;
+
   --text-main: #e5e7eb;
   --text-muted: #9ca3af;
-  --danger: #ef4444;
+
   --dot-neutral: #111827;
   --dot-accent: #22c55e;
+
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  --wheel-h: 120px;
+  --item-h: 32px;
 }
-html, body { 
+
+html,
+body {
   height: 100%;
   width: 100%;
-  background: #020617;
   overflow: hidden;
+  background: var(--bg);
 }
 
 body {
   margin: 0;
   position: fixed;
   inset: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
-  color: var(--text-main);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text-main);
+
+  background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
   overscroll-behavior: none;
   -webkit-overflow-scrolling: auto;
 }
 
-
+/* Шапка */
 .app-header {
   text-align: center;
-  padding: 12px 16px;
-  background: #020617;
-  padding-top: calc(var(--safe-top) + 12px);
-  padding-bottom: 12px;
+  padding: calc(var(--safe-top) + 12px) 16px 12px;
+  background: var(--bg);
 }
 
 .app-header h1 {
@@ -52,34 +57,34 @@ body {
   text-transform: uppercase;
 }
 
+/* Карточка */
 .app-main {
   flex: 1;
   display: flex;
   justify-content: center;
   padding: 16px;
-  padding-top: 16px;
   padding-bottom: calc(16px + var(--safe-bottom));
   overflow: hidden;
 }
 
-
 .metronome-card {
   width: 100%;
   max-width: 420px;
-  background: #020617;
-  border-radius: 24px;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  padding: 18px 16px 20px;
   display: flex;
   flex-direction: column;
   gap: 18px;
+
+  padding: 18px 16px 20px;
+  border-radius: 24px;
+  background: var(--card);
+  border: 1px solid rgba(148, 163, 184, 0.18);
 }
 
-
+/* Темп */
 .tempo-section {
   padding: 16px 14px 14px;
   border-radius: 18px;
-  background: #020617;
+  background: var(--card);
   border: 1px solid rgba(148, 163, 184, 0.5);
 }
 
@@ -94,12 +99,12 @@ body {
 .tempo-input {
   width: 170px;
   border: none;
+  outline: none;
   background: transparent;
   color: var(--text-main);
   font-size: 3rem;
   font-weight: 700;
   text-align: right;
-  outline: none;
 }
 
 .tempo-input::-webkit-outer-spin-button,
@@ -109,11 +114,17 @@ body {
 }
 
 .tempo-unit {
-  font-size: 0.9rem;
-  text-transform: lowercase;
-  color: var(--text-muted);
   align-self: flex-end;
   margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.tempo-stepper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px 0 10px;
 }
 
 .tempo-slider {
@@ -123,55 +134,16 @@ body {
   touch-action: pan-x;
 }
 
-
-.tempo-stepper {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 6px 0 10px;
-}
-
-.step-btn {
-  border: 1px solid rgba(148, 163, 184, 0.35);;
-  background: transparent;
-  color: var(--text-main);
-  border-radius: 999px;
-  padding: 12px 20px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  user-select: none;
-}
-
-.step-btn:active {
-  transform: translateY(1px);
-}
-
-.step-btn:focus {
-  outline: none;
-  border-color: rgba(34, 197, 94, 0.6);
-}
-
-
-:root{
-  --wheel-h: 120px;
-  --item-h: 32px;
-}
-
-.pickers-row {
-  display: flex;
-  gap: 12px;
-}
-
-.picker-wrapper {
-  flex: 1;
-}
+/* Колёса выбора */
+.pickers-row { display: flex; gap: 12px; }
+.picker-wrapper { flex: 1; }
 
 .picker-label {
+  margin-bottom: 4px;
   font-size: 0.8rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin-bottom: 4px;
 }
 
 .wheel {
@@ -186,32 +158,34 @@ body {
   margin: 0;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: none;
-  overflow-x: hidden;                 /* ключевое: нет скролла вбок */
+
   overscroll-behavior: contain;
-  touch-action: pan-y;                /* жесты только вверх/вниз */
+  touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
 
-  /* вот ключ: пустое поле сверху/снизу */
   padding: calc((var(--wheel-h) / 2) - (var(--item-h) / 2)) 0;
 }
 
 .wheel-list::-webkit-scrollbar { display: none; }
 
 .wheel-item {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   height: var(--item-h);
   line-height: var(--item-h);
   text-align: center;
-  padding: 0;
+
   font-size: 1.2rem;
   color: var(--text-muted);
-  transition: transform 0.12s ease, color 0.12s ease;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease, color 0.12s ease;
 }
 
 .wheel-item--active {
@@ -225,19 +199,12 @@ body {
   left: 0;
   width: 100%;
   height: 34px;
-  pointer-events: none;
   z-index: 2;
+  pointer-events: none;
 }
 
-.wheel-gradient-top {
-  top: 0;
-  background: linear-gradient(to bottom, #020617, transparent);
-}
-
-.wheel-gradient-bottom {
-  bottom: 0;
-  background: linear-gradient(to top, #020617, transparent);
-}
+.wheel-gradient-top { top: 0; background: linear-gradient(to bottom, #020617, transparent); }
+.wheel-gradient-bottom { bottom: 0; background: linear-gradient(to top, #020617, transparent); }
 
 .wheel-center-highlight {
   position: absolute;
@@ -251,12 +218,9 @@ body {
   pointer-events: none;
 }
 
-.wheel-list--locked {
-  pointer-events: none;  /* нельзя крутить/тапать */
-}
+.wheel-list--locked { pointer-events: none; }
 
-/* ТОЧКИ ДОЛЕЙ – тоже на фоне, без подписи и свечения */
-
+/* Индикатор основных долей */
 .beats-dots {
   display: flex;
   justify-content: center;
@@ -272,39 +236,26 @@ body {
   transition: background 0.01s ease, transform 0.12s ease;
 }
 
-/* Первая доля — просто больше (НЕ зелёная постоянно) */
-.beat-dot--accent {
-  width: 16px;
-  height: 16px;
-}
+.beat-dot--accent { width: 16px; height: 16px; }
+.beat-dot--active { background: var(--dot-accent); transform: scale(1.6); }
 
-/* Активная доля — зелёная (можно без увеличения, но оставим лёгкий акцент) */
-.beat-dot--active {
-  background: var(--dot-accent);
-  transform: scale(1.6);
-}
-
-/* УПРАВЛЕНИЕ: кнопка и таймер */
-
-.control-section {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+/* Управление */
+.control-section { display: flex; align-items: center; gap: 12px; }
 
 .control-btn {
   flex: 1.1;
   padding: 11px 0;
-  border-radius: 999px;
   border: none;
+  border-radius: 999px;
+  cursor: pointer;
+
   font-size: 1.2rem;
   font-weight: 600;
-  cursor: pointer;
+
   background: var(--accent);
   color: #052e16;
   box-shadow: 0 8px 16px rgba(15, 23, 42, 0.8);
-  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease,
-    color 0.12s ease;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease, color 0.12s ease;
 }
 
 .control-btn:active {
@@ -312,13 +263,7 @@ body {
   box-shadow: 0 4px 10px rgba(15, 23, 42, 0.9);
 }
 
-/* вариант для режима "Стоп" */
-.control-btn--danger {
-  background: var(--danger);
-  color: #fef2f2;
-}
-
-/* таймер – без отдельной "карточки" */
+.control-btn--danger { background: var(--danger); color: #fef2f2; }
 
 .timer-block {
   flex: 0.7;
@@ -341,35 +286,30 @@ body {
   font-weight: 600;
 }
 
-/* АДАПТИВ */
-
-/* Удобные зоны нажатия на телефоне */
-button,
-.step-btn,
-.control-btn {
+/* Удобная зона нажатия и адаптив */
+button, .step-btn, .control-btn {
   min-height: 44px;
   min-width: 44px;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
+
 .step-btn {
-  padding: 10px 14px; /* больше тач-зона */
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: transparent;
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  user-select: none;
 }
 
+.step-btn:active { transform: translateY(1px); }
+.step-btn:focus { outline: none; border-color: rgba(34, 197, 94, 0.6); }
 
 @media (max-width: 480px) {
-  .metronome-card {
-    border-radius: 20px;
-    padding: 14px 12px 16px;
-  }
-
-  .control-section {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .timer-block {
-    width: 100%;
-    flex: none;
-  }
+  .metronome-card { border-radius: 20px; padding: 14px 12px 16px; }
+  .control-section { flex-direction: column; align-items: stretch; }
+  .timer-block { width: 100%; flex: none; }
 }
