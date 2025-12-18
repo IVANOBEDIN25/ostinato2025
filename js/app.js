@@ -475,8 +475,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     beatDuration = secondsPerBeat();
     beatStartTime = ctx.currentTime + 0.05;
-    nextNoteTime = beatStartTime; // первая субдоля всегда 0
-
+    nextNoteTime = beatStartTime;
+    
     if (schedulerId) clearInterval(schedulerId);
     schedulerId = setInterval(scheduler, lookaheadMs);
     scheduler();
