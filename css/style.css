@@ -18,28 +18,24 @@
 html, body { 
   height: 100%;
   width: 100%;
-  overflow: hidden;         /* страница не скроллится */
   background: #020617;
+  overflow: hidden;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  position: fixed;
+  inset: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
   color: var(--text-main);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  position: fixed;     /* ключевое для iOS/iPadOS */
-  inset: 0;            /* top/right/bottom/left = 0 */
-  overflow: hidden;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: auto;
 }
-  
 
-/* HEADER */
 
 .app-header {
   text-align: center;
@@ -52,11 +48,9 @@ body {
 .app-header h1 {
   margin: 0;
   font-size: 1.5rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
-
-/* MAIN WRAPPER */
 
 .app-main {
   flex: 1;
@@ -67,6 +61,7 @@ body {
   padding-bottom: calc(16px + var(--safe-bottom));
   overflow: hidden;
 }
+
 
 .metronome-card {
   width: 100%;
@@ -80,7 +75,6 @@ body {
   gap: 18px;
 }
 
-/* TEMPO – главный элемент */
 
 .tempo-section {
   padding: 16px 14px 14px;
@@ -98,7 +92,7 @@ body {
 }
 
 .tempo-input {
-  width: 180px;
+  width: 170px;
   border: none;
   background: transparent;
   color: var(--text-main);
@@ -106,7 +100,6 @@ body {
   font-weight: 700;
   text-align: right;
   outline: none;
-  /* -moz-appearance: textfield; */
 }
 
 .tempo-input::-webkit-outer-spin-button,
@@ -130,8 +123,6 @@ body {
   touch-action: pan-x;
 }
 
-
-/* BPM step buttons */
 
 .tempo-stepper {
   display: flex;
@@ -161,7 +152,10 @@ body {
 }
 
 
-/* ПАРА ТУМБЛЕРОВ НА ФОНЕ */
+:root{
+  --wheel-h: 120px;
+  --item-h: 32px;
+}
 
 .pickers-row {
   display: flex;
@@ -178,13 +172,6 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   margin-bottom: 4px;
-}
-
-/* ===== WHEEL (iOS-like) ===== */
-
-:root{
-  --wheel-h: 120px;     /* высота окна колеса */
-  --item-h: 32px;       /* высота одной строки */
 }
 
 .wheel {

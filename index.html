@@ -25,7 +25,6 @@
 
   <main class="app-main">
     <section class="metronome-card">
-      <!-- КРУПНЫЙ ТЕМП -->
       <div class="tempo-section">
         <div class="tempo-main">
           <input
@@ -39,7 +38,6 @@
           <span class="tempo-unit">bpm</span>
         </div>
 
-        <!-- ВОТ СЮДА ВСТАВЛЯЕМ КНОПКИ -->
         <div class="tempo-stepper" aria-label="Управление темпом">
           <button class="step-btn" type="button" id="bpm-minus5">-5</button>
           <button class="step-btn" type="button" id="bpm-minus1">-1</button>
@@ -58,10 +56,7 @@
         />
       </div>
 
-
-      <!-- ДВА ТУМБЛЕРА: РАЗМЕР И СУБДОЛИ -->
       <div class="pickers-row">
-        <!-- Размер -->
         <div class="picker-wrapper">
           <div class="picker-label">Division</div>
           <div class="wheel">
@@ -85,7 +80,6 @@
           </div>
         </div>
 
-        <!-- Субдоли -->
         <div class="picker-wrapper">
           <div class="picker-label">Subdivision</div>
           <div class="wheel">
@@ -107,16 +101,13 @@
         </div>
       </div>
 
-      <!-- МИГАЮЩИЕ ДОЛИ (ТОЧКИ НА ФОНЕ) -->
       <div class="beats-dots" id="beats-dots">
-        <!-- по умолчанию 4/4 -->
         <div class="beat-dot beat-dot--accent"></div>
         <div class="beat-dot"></div>
         <div class="beat-dot"></div>
         <div class="beat-dot"></div>
       </div>
 
-      <!-- КНОПКА СТАРТ / СТОП И СЕКУНДОМЕР -->
       <div class="control-section">
         <button id="start-stop-btn" class="control-btn control-btn--primary">
           Start
